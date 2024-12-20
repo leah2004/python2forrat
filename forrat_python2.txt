@@ -1,0 +1,65 @@
+#1
+
+import random
+secret_number = random.randint(1, 100)
+attempts = 0
+print("Я загадал число от 1 до 100. Попробуйте угадать его!")
+while True:
+    user_input = input("Введите ваше число: ")
+    if not user_input.isdigit():
+        print("Пожалуйста, введите целое число.")
+        continue
+        
+    user_guess = int(user_input)
+    attempts += 1
+    
+    if user_guess < secret_number:
+        print("Загаданное число больше.")
+    elif user_guess > secret_number:
+        print("Загаданное число меньше.")
+    else:
+        print(f"Поздравляем! Вы угадали число {secret_number} за {attempts} попыток.")
+        break
+
+#2
+
+def group_characters(input_string):
+    characters = input_string.split()
+    grouped = {}
+    for char in characters:
+        if char in grouped:
+            grouped[char].append(char)
+        else:
+            grouped[char] = [char]
+    result = list(grouped.values())
+    return result
+input_string = input("Введите символы, разделенные пробелами: ")
+grouped_characters = group_characters(input_string)
+print(grouped_characters)
+
+#3
+
+import random
+deck = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+values = {'6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'J': 2, 'Q': 3, 'K': 4, 'A': 11}
+random.shuffle(deck)
+score = 0
+print("Добро пожаловать в карточную игру!")
+while True:
+    choice = input("Хотите взять карту? (y/n): ").strip().lower()
+    
+    if choice == 'n':
+        print(f"Вы набрали {score} очков. Спасибо за игру!")
+        break
+    elif choice == 'y':
+        card = deck.pop()
+        score += values[card]
+        print(f"Вы взяли карту: {card}. Текущий счет: {score} очков.")
+        if score > 21:
+            print(f"Вы проиграли! У вас {score} очков.")
+            break
+        elif score == 21:
+            print("Поздравляем! Вы выиграли с 21 очком!")
+            break
+    else:
+        print("Пожалуйста, введите 'y' или 'n'.")
